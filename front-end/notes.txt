@@ -1,0 +1,32 @@
+
+BUILD
+
+5️⃣ angular.json file replacements
+
+Make sure Angular knows which file to use per build:
+
+"configurations": {
+  "production": {
+    "fileReplacements": [
+      {
+        "replace": "src/environments/environment.ts",
+        "with": "src/environments/environment.prod.ts"
+      }
+    ]
+  },
+  "staging": {
+    "fileReplacements": [
+      {
+        "replace": "src/environments/environment.ts",
+        "with": "src/environments/environment.staging.ts"
+      }
+    ]
+  }
+}
+
+
+Build examples:
+
+ng build
+ng build --configuration=staging
+ng build --configuration=production

@@ -1,0 +1,237 @@
+<div class="page-container p-4">
+  <div class="release-header d-flex align-items-center">
+    <h2 class="font-light">{{this.crqReleaseNumber}} - {{this.crqNumber}}</h2>
+
+    <!-- ✅ Template Dropdow
+    <p-select [options]="templateOptions" [(ngModel)]="selectedTemplate" placeholder="Select Template"
+      [showClear]="true" (onChange)="filterByTemplate()" style="margin-left: 20px; width: 200px">
+    </p-select> -->
+
+    <!-- for start process message -->
+    <p-toast />
+
+    <!-- try -->
+    <div class="card flex justify-center">
+      <p-toast style="width: 50rem;" position="top-center" key="confirm" (onClose)="onReject()" [baseZIndex]="5000">
+        <ng-template let-message #message>
+          <div class="flex flex-col items-start flex-auto">
+            <div class="font-medium text-lg my-4">Deployment completed successfully! Head over to the dashboard to see
+              the updates.
+              <br>
+              <p><a routerLink="/dashboard">Click here</a> for Dashboard</p>
+            </div>
+
+          </div>
+        </ng-template>
+      </p-toast>
+      <!-- <p-button (click)="showConfirm()" label="View" /> -->
+    </div>
+
+    <!-- for all completed message -->
+
+    <!-- <div class="card flex justify-center"> -->
+    <!-- <p-toast position="top-center"/>
+      <div class="flex flex-wrap gap-2">
+        <p-button pRipple (click)="show()" label="Sticky" />
+        <p-button pRipple (click)="clear()" label="Clear" severity="secondary" />
+      </div> -->
+    <!-- </div> -->
+
+    <div class="grid">
+
+      <!-- <div class="col" *ngIf="showStart">
+        <div class="text-center p-3 border-round-sm">
+          <button *ngIf="!enableDashboard" pButton type="button" label="Dependency" class="p-button-success"
+            (click)="openComments()">
+          </button>
+        </div>
+      </div> -->
+
+      <!-- <div class="col" *ngIf="showStart">
+        <div class="text-center p-3 border-round-sm">
+          <button pButton type="button" label="Start" class="p-button-success" (click)="startProcessInstance()">
+          </button>
+        </div>
+      </div> -->
+
+      <!-- <div class="col" *ngIf="!showStart"> -->
+      <div class="col">
+        <div class="text-center p-3 border-round-sm">
+          <button pButton type="button" label="Dashboard" class="p-button-success" routerLink="/dashboard">
+            <!-- [disabled]="enableDashboard"> -->
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- New Table -->
+
+  <div class="card flex justify-center items-center no-border" *ngIf="!showTasklistTable">
+    <p-progress-spinner ariaLabel="loading" />
+  </div>
+
+  <!-- TAKS TABLE HERE -->
+  <div class="card" *ngIf="showTasklistTable">
+    <p-table [columns]="myTasklistTable" class="font-light" [value]="myTasklistData" [paginator]="true" [rows]="5"
+      [tableStyle]="{ 'min-width': '55rem' }" [rowsPerPageOptions]="[5, 10, 20]">
+      <ng-template #header let-columns>
+        <tr>
+          <th *ngFor="let col of columns">
+            {{ col.header }}
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template #body let-rowData let-columns="columns" let-rowIndex="rowIndex">
+        <tr>
+          <!-- <td *ngFor="let col of columns">
+            <ng-container *ngIf="col.field === 'srNo'; else normalCell">
+              {{ rowIndex + 1 }}
+            </ng-container>
+
+            <ng-template #normalCell>
+              {{ rowData[col.field] }}
+            </ng-template>
+          </td> -->
+          <td *ngFor="let col of columns">
+
+            <!-- S.No -->
+            <ng-container *ngIf="col.field === 'srNo'">
+              {{ rowIndex + 1 }}
+            </ng-container>
+
+            <!-- RAG -->
+            <ng-container *ngIf="col.field === 'rag'">
+              <span class="rag-box" [ngClass]="rowData.rag?.trim().toLowerCase()" title="{{ rowData.rag }}">
+              </span>
+            </ng-container>
+
+            <!-- Normal cells -->
+            <ng-container *ngIf="col.field !== 'srNo' && col.field !== 'rag'">
+              {{ rowData[col.field] }}
+            </ng-container>
+          </td>
+
+        </tr>
+      </ng-template>
+
+    </p-table>
+    <br>
+    <br>
+  </div>
+
+
+  <!-- Comments Dialog -->
+  <p-dialog header="Create Dependency" [modal]="true" [(visible)]="commentsDialogVisible" [style]="{ width: '70rem' }"
+    [dismissableMask]="true">
+
+    <div class="grid">
+      <div class="col">
+        <div class="text-center p-3 border-round-sm font-bold">S.No</div>
+      </div>
+      <div class="col">
+        <div class="text-center p-3 border-round-sm font-bold ">Activity</div>
+      </div>
+      <div class="col">
+        <div class="text-center p-3 border-round-sm font-bold">Team Details</div>
+      </div>
+      <div class="col">
+        <div class="text-center p-3 border-round-sm font-bold ">Parallel</div>
+      </div>
+    </div>
+
+    <div class="grid" *ngFor="let task of this.dependencyDialogData;index as i">
+      <div class="col">
+        <div class="text-center p-3 border-round-sm ">{{i+1}}</div>
+      </div>
+      <div class="col">
+        <div class="text-center p-3 border-round-sm ">
+          {{task.activity}}
+        </div>
+      </div>
+      <div class="col">
+        <div class="text-center p-3 border-round-sm ">
+          {{task.department}}
+        </div>
+      </div>
+      <div class="col">
+        <!-- <div class="text-center p-3 border-round-sm  ">
+          <p-checkbox [ngModel]="false" [binary]="true" (onChange)="parallelFun(i+1)"/>
+        </div> -->
+      </div>
+    </div>
+
+    <!-- <div class="grid">
+      <div class="col">
+        <div class="text-center p-3 border-round-sm ">2</div>
+      </div>
+      <div class="col">
+        <div class="text-center p-3 border-round-sm ">
+         VCI Server Team
+        </div>
+      </div>
+      <div class="col">
+        <div class="text-center p-3 border-round-sm ">
+          <p-checkbox [ngModel]="false" [binary]="true" />
+        </div>
+      </div>
+    </div> -->
+    <!-- <div class="grid">
+      <div class="col">
+        <div class="text-center p-3 border-round-sm">3</div>
+      </div>
+      <div class="col">
+        <div class="text-center p-3 border-round-sm">
+          Siebel TA
+        </div>
+
+      </div>
+      <div class="col">
+        <div class="text-center p-3 border-round-sm">
+          <p-checkbox [ngModel]="false" [binary]="true" />
+        </div>
+      </div>
+    </div> -->
+    <!-- <div class="grid">
+      <div class="col">
+        <div class="text-center p-3 border-round-sm">4</div>
+      </div>
+      <div class="col">
+        <div class="text-center p-3 border-round-sm">
+          OSS L2
+        </div>
+
+      </div>
+      <div class="col">
+        <div class="text-center p-3 border-round-sm ">
+          <p-checkbox [ngModel]="false" [binary]="true" />
+        </div>
+      </div>
+    </div> -->
+
+    <!-- <button pButton label="Save" class="p-button-primary" (click)="depSave()"></button> -->
+    <br />
+    <br />
+    <div class="comments-history">
+      <!-- <pre>{{ commentsEmployee?.comments }}</pre> -->
+      <!-- <pre>Enter Dependency</pre> -->
+      <!-- <textarea class="comments-textarea" rows="3" cols="50" [(ngModel)]="commentsDraft" -->
+
+      <textarea class="comments-textarea" rows="3" cols="50" [(ngModel)]="depsComment"
+        placeholder="Enter Dependency"></textarea>
+
+    </div>
+
+    <button pButton label="Submit" class="p-button-primary" (click)="saveComments()"></button>
+
+
+    <!-- <textarea class="comments-textarea" rows="3" cols="50" [(ngModel)]="commentsDraft"
+      placeholder="Enter new comment..."></textarea>
+    <div class="flex justify-content-end gap-2 mt-3">
+      <button pButton label="Cancel" class="p-button-text" (click)="closeComments()"></button>
+      <button pButton label="Save" class="p-button-primary" (click)="saveComments()"></button>
+    </div> -->
+  </p-dialog>
+
+</div>

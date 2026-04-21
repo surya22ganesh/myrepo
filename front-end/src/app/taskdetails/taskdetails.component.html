@@ -1,0 +1,35 @@
+<div class="status-container">
+  <h2>Update Task Status</h2>
+
+    <div class="col-6">
+        <label class="question-label">Status:</label>
+        <p-autoComplete placeholder="Select Status" class="m1" [(ngModel)]="this.selectedStatus" [dropdown]="true"
+          [suggestions]="filteredStatuses" (completeMethod)="filterStatuses($event)"
+          (ngModelChange)="onStatusSelect($event)" field="label" name="status">
+        </p-autoComplete>
+      </div>
+
+
+  <!-- <select id="status" [(ngModel)]="selectedStatus">
+    <option value="">-- Select Status --</option>
+    <option *ngFor="let status of statusOptions" [value]="status">{{ status }}</option>
+  </select> -->
+
+  <label for="comments">Comments</label>
+  <textarea id="comments" [(ngModel)]="comments" placeholder="Enter comments..."></textarea>
+
+  <button (click)="save()" [disabled]="isLoading">
+    {{ isLoading ? 'Saving...' : 'Save' }}
+  </button>
+
+  <div *ngIf="responses.length > 0" class="response-list">
+    <h3>Saved Responses</h3>
+    <ul>
+      <li *ngFor="let res of responses">
+        <b>Status:</b> {{ res.status }} |
+        <b>Comments:</b> {{ res.comments }} |
+        <b>RAG:</b> <span [style.color]="res.rag">{{ res.rag }}</span>
+      </li>
+    </ul>
+  </div>
+</div>

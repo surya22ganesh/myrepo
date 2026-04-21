@@ -1,0 +1,204 @@
+.page-container {
+  padding: 2rem;
+  background-color: white;
+  height: 100%;
+}
+
+/* .release-title {
+  color: #792fd3;
+  font-weight: 700;
+  margin: 0;
+} */
+
+.release-title {
+  margin-bottom: 24px;
+  /* adjust size */
+}
+
+.excel-upload-container {
+  margin-top: -60px;
+  /* move it up */
+  margin-left: -50px;
+  /* moves it to the right */
+}
+
+.start-btn {
+  margin-top: 40px;
+  /* moves it upward */
+}
+
+.excel-upload-container {
+  margin-left: -4px;
+  /* moves it to the right */
+}
+
+
+/* Header: flex layout */
+.release-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.template-dropdown {
+  flex: 1 1 250px;
+  min-width: 200px;
+}
+
+.actions-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+  /* smaller gap to bring Start button closer to top */
+}
+
+.actions-right button.p-button-success {
+  margin-bottom: 0.5rem;
+  /* push Excel input slightly down */
+}
+
+/* Excel Upload */
+.excel-upload-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.excel-input {
+  width: 200px;
+  padding: 6px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+/* Table Styling */
+.custom-table ::ng-deep .p-datatable-thead>tr>th {
+  background-color: #004085 !important;
+  color: white;
+  text-align: center;
+  font-weight: 600;
+  padding: 6px 10px;
+}
+
+.custom-table ::ng-deep .p-datatable-tbody>tr>td {
+  background-color: #f0faff;
+  vertical-align: middle;
+  padding: 6px 10px;
+  text-align: center;
+  font-size: 13px;
+}
+
+.custom-table ::ng-deep .p-datatable-tbody>tr:nth-child(even)>td {
+  background-color: #eaf4fc;
+}
+
+/* Textarea inside table */
+.activity-textarea {
+  width: 100%;
+  resize: none;
+  border: none;
+  background-color: transparent;
+  font-size: 14px;
+  overflow-y: auto;
+}
+
+/* Status badges */
+.status-display {
+  padding: 4px 8px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.bg-grey {
+  background-color: grey;
+  color: white;
+}
+
+.bg-red {
+  background-color: red;
+  color: white;
+}
+
+.bg-amber {
+  background-color: orange;
+  color: white;
+}
+
+.bg-blue {
+  background-color: blue;
+  color: white;
+}
+
+.bg-green {
+  background-color: green;
+  color: white;
+}
+
+/* Comments */
+.comments-history {
+  background: #f4f4f4;
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+  max-height: 200px;
+  overflow-y: auto;
+  font-family: monospace;
+  white-space: pre-wrap;
+  margin-bottom: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .release-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .actions-right {
+    align-items: flex-start;
+  }
+
+  .excel-input {
+    width: 100%;
+  }
+}
+
+/* NEW CSS CODES */
+
+::ng-deep.p-datatable-thead>tr>th {
+  background-color: #e9ecef !important;
+  /* background-color: #f7f9fb !important; */
+  /* color: black !important; */
+  font-weight: light !important;
+}
+
+.no-border {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Base RAG rectangle */
+.rag-box {
+  display: inline-block;
+  width: 30px;
+  height: 25px;
+  border-radius: 50%;
+  border: 1px solid #999;
+}
+
+/* DB values → visual colors */
+.rag-box.green {
+  background-color: #2e7d32;
+}
+
+.rag-box.amber {
+  background-color: #ffb300;
+}
+
+.rag-box.red {
+  background-color: #c62828;
+}

@@ -1,0 +1,245 @@
+<div class="container-fluid p-0">
+  <!-- Header -->
+  <div class="dashboard-header">
+    <h1>Real-Time Deployment Dashboard</h1>
+    <p>Live Task Monitoring & Color-coded Status Tracking</p>
+  </div>
+
+  <!-- Last Updated -->
+  <div class="container mt-3">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h4>Pre-Production Deployment - {{this.crqReleaseNumber}} - {{this.crqNumber}}</h4>
+      <div class="flex align-items-center gap-3">
+        <span class="bg-green-100 text-green-600 border-round-2xl px-3 py-2 text-lg font-normal">
+          Last Updated: {{ timeAgo }}
+        </span>
+
+        <span
+          class="flex align-items-center gap-2 bg-green-500 text-white border-round-2xl px-3 py-2 text-sm font-medium">
+          <span class="live-dot"></span>
+          LIVE
+        </span>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="row g-2 mb-3">
+      <div class="col-md-12">
+        <div class="stats-card" [class.clicked]="activeCard === 'total'" (click)="onCardClick('total')">
+          <h2>{{totalTasksCount}}</h2>
+          <p>Total Tasks</p>
+        </div>
+      </div>
+      <!-- Unassigned -->
+      <div class="col-md-2">
+        <div class="stats-card" [class.clicked]="activeCard === 'unassigned'" (click)="onCardClick('unassigned')">
+          <h2 class="text-secondary">{{ unassignedCount }}</h2>
+          <p>Unassigned</p>
+        </div>
+      </div>
+      <!-- Assigned -->
+      <div class="col-md-2">
+        <div class="stats-card" [class.clicked]="activeCard === 'assigned'" (click)="onCardClick('assigned')">
+          <h2 style="color:#17a2b8;">{{ assignedCount }}</h2>
+          <p>Assigned</p>
+        </div>
+      </div>
+      <!-- In Progress-->
+      <div class="col-md-2">
+        <div class="stats-card" [class.clicked]="activeCard === 'progress'" (click)="onCardClick('progress')">
+          <h2 class="text-primary">{{inProgressCount}}</h2>
+          <p>In Progress</p>
+        </div>
+      </div>
+      <!-- Delay In Action-->
+      <div class="col-md-2">
+        <div class="stats-card" [class.clicked]="activeCard === 'delayed'" (click)="onCardClick('delayed')">
+          <h2 style="color:#FFBF00;">{{delayedCount}}</h2>
+          <p>Delay in action</p>
+        </div>
+      </div>
+      <!-- Failed-->
+      <div class="col-md-2">
+        <div class="stats-card" [class.clicked]="activeCard === 'failed'" (click)="onCardClick('failed')">
+          <h2 class="text-danger">{{failedCount}}</h2>
+          <!-- <h2 class="text-danger">1</h2> -->
+          <p>Failed</p>
+        </div>
+      </div>
+      <!-- Completed-->
+      <div class="col-md-2">
+        <div class="stats-card" [class.clicked]="activeCard === 'completed'" (click)="onCardClick('completed')">
+          <h2 class="text-success">
+            {{completedCount}}
+          </h2>
+          <p>Completed</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="grid" *ngIf="calculatePercentage()"> -->
+    <div class="grid" *ngIf="showCharts">
+      <!-- <div class="grid" *ngIf="true"> -->
+      <div class="col-6">
+        <!-- Overall Progress -->
+
+        <div class="flex flex-column align-items-end p-4">
+          <h5 class="mb-4 text-center w-100">Overall Deployment Progress</h5>
+
+
+          <!-- <div class="flex justify-content-center align-items-center h-full w-full">
+            <h1>{{ percentData }}%</h1>
+          </div> -->
+
+
+          <div class="card grid-container" style="border: 0px;">
+            <!-- <p-chart type="doughnut" [data]="data" [options]="options" (onDataSelect)="chartFun($event)"></p-chart> -->
+
+            <p-chart type="doughnut" [data]="overallPercentageChartData"
+              [options]="overallPercentageChartOptions"></p-chart>
+            <!-- <p-chart type="doughnut" [data]="overallPercentageChartData" [options]="overallPercentageChartOptions"
+              (onDataSelect)="chartFun($event)"></p-chart> -->
+            <!-- Centered text -->
+
+            <!-- <span>
+              <a href="/rectrospective">Completed On Time</a>
+            </span> -->
+
+            <div
+              class="absolute top-50 bottom-50 right-50 left-50 -translate-x-40 -translate-y-40 flex justify-content-center align-items-center">
+              <div class="text-7xl mt-6 font-light">{{ this.percentData }}%</div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+      <div class="col-6">
+        <!-- Deployement chart -->
+        <div class="flex flex-column align-items-center p-4">
+          <h5 class="mb-4">Overall Execution RAG Status</h5>
+
+          <div class="card grid-container" style="border: 0px;">
+
+            <p-chart type="doughnut" [data]="data" [options]="options" (onDataSelect)="chartFun($event)">
+            </p-chart>
+
+            <!-- Center Text -->
+            <div class="absolute top-50 bottom-50 right-50 left-50 
+         -translate-x-40 -translate-y-40 
+         flex justify-content-center align-items-center">
+
+              <div class="text-7xl mt-6 font-light">
+                {{ completedOnTimePercent }}%
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- <p-chart type="doughnut" [data]="data" [options]="options" (onDataSelect)="chartFun($event)"></p-chart> -->
+          <!-- <p-chart type="doughnut" [data]="data" [options]="options"></p-chart> -->
+          <!--
+          <a routerLink="/retrospective" class="mt-3">Completed With Issues</a>
+          <a routerLink="/retrospective" class="mt-2">Completed with A Delay</a> -->
+
+          <!-- <p-chart type="doughnut" [data]="chartData" [options]="chartOptions"
+            styleClass="w-full md:w-30rem h-20rem"></p-chart> -->
+
+          <!-- Footer Cards -->
+          <!-- <div class="flex justify-content-center gap-4 mt-6 w-full">
+            <div class="flex-1 text-center bg-blue-50 p-3 border-round-lg shadow-1">
+            <div class="flex-1 text-center bg-blue-50 p-3 border-round-lg shadow-1">
+            <div class="flex-1 text-center bg-blue-50 p-3 border-round-lg shadow-1">
+              <div class="text-2xl font-bold text-blue-600">25</div>
+              <div class="text-sm">Total Applications</div>
+            </div>
+            <div class="flex-1 text-center bg-green-50 p-3 border-round-lg shadow-1">
+              <div class="text-2xl font-bold text-green-600">5</div>
+              <div class="text-sm">Deployment Categories</div>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+
+
+    <!-- <div class="progress-section">
+      <h5>Overall Deployment Progress</h5>
+      <div class="progress" style="height: 20px; border-radius: 12px;">
+        <div class="progress-bar progress-completed" role="progressbar" [style.width.%]="completedPercent"></div>
+        <div class="progress-bar progress-inprogress" role="progressbar" [style.width.%]="delayedPercent"></div>
+        <div class="progress-bar progress-failed" role="progressbar" [style.width.%]="failedPercent"></div>
+      </div>
+      <div class="progress-labels mt-2">
+        <span class="text-success">✓ {{completedPercent}}% Completed</span>
+        <span class="text-warning">⏳ {{delayedPercent}}% Delayed</span>
+        <span class="text-danger">✗ {{failedPercent}}% Failed</span>
+      </div>
+    </div> -->
+
+    <!-- Timeline -->
+    <div class="timeline">
+
+      <h5 class="mb-3">Task Timeline & Status</h5>
+      <!-- <div class="timeline-item" *ngFor="let task of this.totalTasks"> -->
+      <div class="timeline-item" *ngFor="let task of this.filteredTasks">
+        <div class="task-status status-completed" *ngIf="task.status=='Completed'">✓</div>
+        <!-- <div class="task-status status-inprogress" *ngIf="task.status=='Completed'">⏳</div> -->
+        <div class="task-status status-failed" *ngIf="task.status=='Failed'">✗</div>
+        <div class="task-status status-pending" *ngIf="task.status=='Delayed'">⏸</div>
+        <div class="task-info">
+          <div class="task-name">{{task.activity}}</div>
+          <div class="task-details">{{task.teamDetails}}</div>
+        </div>
+        <div class="text-end">
+          <div class="task-duration">{{task.status}}</div>
+          <div>{{task.actualStartDate}} - {{task.actualEndDate}}</div>
+        </div>
+      </div>
+      <div class="text-center p-8 border-round-sm">
+        <button pButton type="button" label="Start Retrospective" class="p-button-success" routerLink="/retrospective">
+        </button>
+      </div>
+
+      <!-- <div class="timeline-item">
+        <div class="task-status status-inprogress">⏳</div>
+        <div class="task-info">
+          <div class="task-name">Server</div>
+          <div class="task-details">Assigned: Release Team | Environment: Production</div>
+          <div class="sla-warning">⚠️ Task approaching SLA deadline (30 min remaining)</div>
+        </div>
+        <div class="text-end">
+          <div class="task-duration">Delayed</div>
+          <div>Started: 14:45</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="task-status status-failed">✗</div>
+        <div class="task-info">
+          <div class="task-name">Siebel</div>
+          <div class="task-details">Assigned: Security Team | Environment: Production</div>
+          <div class="sla-warning">❌ Certificate validation failed - Escalated to L2 Support</div>
+        </div>
+        <div class="text-end">
+          <div class="task-duration">Failed</div>
+          <div>13:00 - 13:45</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="task-status status-pending">⏸</div>
+        <div class="task-info">
+          <div class="task-name">OSS L2</div>
+          <div class="task-details">Assigned: QA Team | Environment: Production</div>
+        </div>
+        <div class="text-end">
+          <div class="task-duration">Not Started</div>
+          <div>Scheduled: 15:30</div>
+        </div>
+      </div> -->
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,700 @@
+.main-wrapper {
+  width: 100%;
+  max-width: 1617px;
+
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 40px 16px;
+}
+
+.main-card {
+  width: 1163px;
+  height: 812px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  /* 🔥 important spacing between sections */
+
+  margin: 0 auto;
+  /* center align */
+
+  background: #ffffff;
+  border-radius: 8px;
+
+  /* padding: 16px; */
+  box-sizing: border-box;
+
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.15);
+  /* if needed */
+}
+
+.info-pair .label,
+.info-pair .value,
+.tab,
+.p-datatable {
+  font-family: "Akkurat", Arial, sans-serif !important;
+  font-size: 14px !important;
+}
+
+.tab {
+  min-width: 98px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 8px;
+  background: #ffffff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6b7280;
+  border-bottom: 1px solid transparent;
+
+}
+
+.detail-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  /* exact Figma gap */
+}
+
+.page-container {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+.main-wrapper {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+.tab.active {
+  color: #6c63ff;
+  border-bottom: 2px solid #6c63ff;
+}
+
+.page-header {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-bottom: 8px;
+  margin-top: 25px;
+}
+
+:host ::ng-deep .no-hover-table thead > tr > th,
+:host ::ng-deep .no-hover-table thead > tr > th.p-sortable-column {
+  background-color: #6c63ff !important; /* your header blue */
+  color: #ffffff !important;            /* 👈 keep text WHITE */
+}
+
+/* 🔥 Hover + Active + Highlight states */
+:host ::ng-deep .no-hover-table thead > tr > th.p-sortable-column:hover,
+:host ::ng-deep .no-hover-table thead > tr > th.p-sortable-column:focus,
+:host ::ng-deep .no-hover-table thead > tr > th.p-sortable-column.p-highlight,
+:host ::ng-deep .no-hover-table thead > tr > th.p-sortable-column.p-highlight:hover {
+  background-color: #6c63ff!important; /* no change */
+  color: #ffffff !important;            /* 👈 stays white */
+}
+:host ::ng-deep .no-hover-table .p-sortable-column .p-sortable-column-icon {
+  color: #ffffff !important;
+}
+
+.heading-text {
+  font-size: 20px;
+  font-weight: 600;
+  color: #111827;
+  /* dark text */
+}
+
+.page-container {
+
+  min-height: 1024px;
+  margin: 0 auto;
+  overflow: visible;
+  padding: 16px 16px 40px 16px;
+  background-color: white;
+  box-sizing: border-box;
+}
+
+.section-spacing {
+  margin-bottom: 20px;
+}
+
+.start-date-container {
+  width: 261px;
+  height: 50px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  gap: 4px;
+  /* label + input spacing */
+}
+
+.start-date-container label {
+  font-size: 12px;
+  color: #3C4044;
+  font-weight: 500;
+}
+
+.filter-container {
+  width: 100%;
+  max-width: 1163px;
+  /* match your table width */
+  height: 50px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin: 0 auto;
+  /* center */
+  padding-left: 0 !important;
+  box-sizing: border-box;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  /* clean spacing */
+}
+
+.date-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.date-item label {
+  width: 108px;
+  height: 20px;
+
+  display: flex;
+  align-items: center;
+  /* vertical center */
+  justify-content: space-between;
+  /* as per spec */
+
+  margin: 0 0 4px 0;
+  padding: 0;
+
+  font-size: 14px;
+
+}
+
+.date-range {
+  display: flex;
+  gap: 10px;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.date-range .dash {
+  font-size: 18px;
+  margin: 0 4px;
+}
+
+.content-wrapper {
+  width: 100%;
+  height: 686px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 0 auto;
+
+}
+
+.tabs-container {
+  width: 229px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  padding: 4px;
+  border-radius: 6px;
+
+  background: #F4F4F5;
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+
+  font-size: 12px;
+  font-weight: 500;
+
+  padding: 6px 8px;
+  border-radius: 4px;
+
+  cursor: pointer;
+  color: #6b7280;
+}
+
+.tab.active {
+  background: white;
+  color: #111827;
+
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.main-card {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  background: #ffffff;
+  border-radius: 8px;
+
+  padding: 16px;
+  box-sizing: border-box;
+
+}
+
+/* Apply same font everywhere (CRQ, ROTA, RETRO) */
+.p-datatable {
+  font-family: "Akkurat", Arial, sans-serif !important;
+  font-size: 14px !important;
+}
+
+/* Header */
+.p-datatable thead th {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+}
+
+/* Body */
+.p-datatable tbody td {
+  font-size: 14px !important;
+  font-weight: 400 !important;
+}
+
+
+/* Header base */
+::ng-deep .p-datatable thead>tr>th {
+  font-family: "Akkurat", Arial, sans-serif !important;
+  font-size: 14px !important;
+  background: #6c63ff;
+  color: #fff;
+  font-weight: 600;
+  padding: 12px 16px;
+  border: none;
+}
+
+
+::ng-deep .p-datatable thead>tr>th:first-child {
+  border-top-left-radius: 8px;
+}
+
+::ng-deep .p-datatable thead>tr>th:last-child {
+  border-top-right-radius: 8px;
+}
+
+.content-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.table-wrapper {
+  width: 1163px;
+}
+
+::ng-deep .p-datatable th {
+  font-family: "Akkurat", Arial, sans-serif !important;
+  font-size: 14px !important;
+  white-space: nowrap;
+}
+
+::ng-deep .p-datatable td {
+  font-family: "Akkurat", Arial, sans-serif !important;
+  font-size: 14px !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.no-data {
+  text-align: center;
+  padding: 40px 0;
+  font-size: 14px;
+  color: #6b7280;
+  /* subtle grey */
+}
+
+.no-data-cell {
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+  color: #6b7280;
+  /* subtle grey */
+}
+
+.main-card {
+  width: 100%;
+  /* max-width: 1163px; */
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  padding: 16px;
+
+  border-radius: 8px;
+  background: #ffffff;
+
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  /* Vertical layout */
+  gap: 24px;
+  /* EXACT figma spacing */
+
+  width: 100%;
+  /* fill container */
+  /* max-width: 1163px; */
+  /* figma width */
+
+  margin: 0 auto;
+  /* center */
+}
+
+.crq-row {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+  /* EXACT figma gap */
+  height: 40px;
+  /* figma height */
+  width: 100%;
+  /* fill */
+}
+
+.crq-label {
+  min-width: 180px;
+  /* keeps alignment clean */
+  font-weight: 500;
+}
+
+.crq-link {
+  color: #2563eb;
+  /* blue link style */
+  cursor: pointer;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.crq-link:hover {
+  text-decoration: underline;
+}
+
+.header-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  /* Figma gap */
+}
+
+.back-icon {
+  font-size: 16px;
+  /* controls icon inside */
+  width: 24px;
+  height: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.back-icon:hover {
+  background-color: #f1f5f9;
+  /* light hover like figma */
+}
+
+.page-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.info-card {
+  width: 150%;
+  /* max-width: 2000px; */
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* 2 columns */
+  gap: 16px;
+  /* figma gap */
+
+  padding: 12px;
+  border-radius: 8px;
+
+  border: 1px solid #D5DBDE;
+  background: #FFFFFF;
+}
+
+.value::before {
+  content: ":";
+  margin-right: 6px;
+  color: #9ca3af;
+}
+
+.back-icon {
+  font-size: 14px;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.label {
+  font-weight: 500;
+  color: #6b7280;
+  /* subtle grey */
+  min-width: 140px;
+  /* aligns values */
+}
+
+.value {
+  color: #111827;
+}
+
+.info-card {
+  width: 100%;
+  /* max-width: 1139px; */
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* 2 columns (pairs) */
+
+  row-gap: 8px;
+  /* figma */
+  column-gap: 24px;
+  /* increase for better spacing */
+
+  padding: 12px;
+  border-radius: 8px;
+
+  border: 1px solid #D5DBDE;
+  background: #FFFFFF;
+}
+
+.info-pair {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.label {
+  min-width: 160px;
+  font-size: 12px;
+  color: #6b7280;
+  font-weight: 700;
+}
+
+.value {
+  font-size: 12px;
+  color: #111827;
+}
+
+.crq-count {
+  text-align: center;
+  font-weight: 300;
+}
+
+.table-wrapper {
+  width: 100%;
+}
+
+.options-wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.myStyleClass {
+  /* background-color: rgb(241, 238, 238); */
+  background-color: #f2f2f2;
+}
+
+.status-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* green circle */
+.status-completed {
+  background-color: green;
+}
+
+/* orange circle */
+.status-inprogress {
+  background-color: orange;
+}
+
+/* keep text normal */
+.status-text {
+  color: black;
+}
+
+/* 🔵 FULL FILTER BAR */
+.filter-container {
+  display: flex;
+  align-items: flex-end;
+  gap: 30px;              /* controls spacing between blocks */
+  padding: 15px 20px;     /* fixes left/right margin issue */
+  background-color: #f8fafc;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+/* 🔹 EACH FILTER BLOCK */
+.filter-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 220px;
+}
+
+/* LABEL */
+.filter-item label {
+  font-family: 'Akkurat', Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #3C4044;
+  line-height: 16px;
+}
+
+/* .filter-item select,
+::ng-deep .p-datepicker {
+  height: 50px;
+  min-height: 49px;
+  border-radius: 6px;
+  border: 1px solid #D5DBDE;
+  padding: 8px 12px;
+} */
+
+.filter-item.search-item {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+  min-width: auto;
+  width: 240px;
+}
+
+
+.filter-item select {
+  width: 180px;
+  height: 36px;
+  border-radius: 6px;
+  border: 1px solid #D5DBDE;
+  background: #FFFFFF;
+  padding: 4px 8px;
+  font-size: 14px;
+  font-family: "Akkurat", Arial, sans-serif;
+}
+
+/* Container */
+.status-item {
+  width: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-left: 0;
+  margin-left: 0;
+  position: relative;
+  top: -20px;
+  height: 50px;
+}
+
+/* Label */
+.status-item label {
+  margin: 0;
+  padding: 0;
+  line-height: 16px;
+  margin: 0;
+  padding-left: -10px;
+}
+
+/* Dropdown wrapper */
+/* Dropdown container */
+::ng-deep .status-item .p-dropdown {
+  width: 120px;
+  height: 30px;
+  min-height: 30px;
+
+  padding: 0 8px;
+  /* left & right (extra-small) */
+
+  background: #FFFFFF;
+  border: 1px solid #D5DBDE;
+  border-radius: 0;
+  /* change to 4px if you want small radius */
+
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* Text inside dropdown */
+::ng-deep .status-item .p-dropdown-label {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  font-size: 12px;
+  padding-left: -10px !important;
+}
+
+/* Dropdown arrow area */
+::ng-deep .status-item .p-dropdown-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  /* keeps icon area neat */
+}
+
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(255, 255, 255, 0.6);
+  z-index: 9999;
+}

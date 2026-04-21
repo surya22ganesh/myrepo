@@ -1,0 +1,67 @@
+/* ===== Layout ===== */
+.login-container {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url('/assets/VodafoneThreebg.jpg') no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
+  padding: 2rem;
+}
+
+/* ===== Card Styling ===== */
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 1rem;
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* ===== Inputs ===== */
+.p-inputtext,
+.p-password,
+.p-password input {
+  width: 100% !important;
+  height: 46px !important;
+  font-size: 14px;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.p-password input {
+  padding: 0.5rem 0.75rem;
+}
+
+/* ===== Error & Validation ===== */
+.text-danger {
+  color: #d32f2f !important;
+}
+
+.ng-invalid.ng-dirty {
+  border-color: #d32f2f !important;
+  box-shadow: 0 0 0 0.2rem rgba(211, 47, 47, 0.1);
+}
+
+/* ===== Footer ===== */
+.login-footer {
+  font-size: 0.85rem;
+  color: #444;
+}
+
+/* ===== Animations ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

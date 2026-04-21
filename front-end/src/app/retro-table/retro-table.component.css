@@ -1,0 +1,18 @@
+.rag-box {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.red {
+  background-color: #e74c3c;
+}
+
+.amber {
+  background-color: #f1c40f;
+}
+
+.green {
+  background-color: #2ecc71;
+}

@@ -1,0 +1,59 @@
+<!-- TAKS TABLE HERE -->
+<!-- <div class="card" *ngIf="showCrqTasksTable"> -->
+
+<!-- PROGRESS SPINNER -->
+
+@if(showCrqTasksTable){
+<div class="card">
+    <p-table [columns]="crqTaskTableColumns" class="font-light" [value]="crqTaskTableData" [paginator]="true" [rows]="5"
+        [tableStyle]="{ 'min-width': '55rem' }" [rowsPerPageOptions]="[5, 10, 20]">
+        <ng-template #header let-columns>
+            <tr>
+                <th *ngFor="let col of columns">
+                    {{ col.header }}
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template #body let-rowData let-columns="columns" let-rowIndex="rowIndex">
+            <tr>
+                <td *ngFor="let col of columns">
+
+                    <!-- S.No -->
+                    <ng-container *ngIf="col.field === 'srNo'">
+                        {{ rowIndex + 1 }}
+                    </ng-container>
+
+                    <!-- RAG -->
+                    <ng-container *ngIf="col.field === 'rag'">
+                        <span class="rag-box" [ngClass]="rowData.rag?.trim().toLowerCase()" title="{{ rowData.rag }}">
+                        </span>
+                    </ng-container>
+
+                    <!-- Normal cells -->
+                    <ng-container *ngIf="col.field !== 'srNo' && col.field !== 'rag'">
+                        {{ rowData[col.field] }}
+                    </ng-container>
+                </td>
+
+            </tr>
+        </ng-template>
+
+    </p-table>
+    <br>
+    <br>
+</div>
+}
+@else{
+<!-- <div class="card flex justify-center items-center no-border">
+        <p-progress-spinner ariaLabel="loading" />
+    </div> -->
+
+<div class="grid">
+    <div class="col">
+        <div class="text-center p-3 font-light">
+            Loading...
+        </div>
+    </div>
+</div>
+
+}

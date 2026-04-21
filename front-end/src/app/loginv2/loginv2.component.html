@@ -1,0 +1,87 @@
+<div class="login-container">
+    <p-toast />
+    <!-- <div class="form-container"> -->
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <!-- {{ loginForm.value | json }} -->
+
+        <div class="flex justify-between">
+            <h1 class="font-light">{{isLoginPage ? "Login" : "Register"}}</h1>
+        </div>
+
+        <div class="flex justify-between">
+            <!-- Left Input -->
+            <div class="w-full">
+                <!-- <div> -->
+                <p-floatlabel variant="on">
+                    <input pInputText id="username" formControlName="username" autocomplete="off" />
+                    <label for="username">User Name</label>
+                </p-floatlabel>
+            </div>
+        </div>
+        <br />
+        <div class="flex justify-between" *ngIf="!isLoginPage">
+            <!-- Left Input -->
+            <div class="w-full">
+                <!-- <div> -->
+                <p-floatlabel variant="on">
+                    <input pInputText id="emailId" formControlName="emailId" autocomplete="off" />
+                    <label for="emailId">Email</label>
+                </p-floatlabel>
+            </div>
+        </div>
+        <br>
+        <div class="flex justify-between">
+            <!-- Left Input -->
+            <div class="w-full">
+                <!-- <div> -->
+                <p-floatlabel variant="on">
+                    <p-password id="password" formControlName="password" [feedback]="false" autocomplete="off" fluid />
+                    <label for="password">Password</label>
+                    <!-- <p-password formControlName="value" [invalid]="isInvalid('value')" [feedback]="false" autocomplete="off" fluid /> -->
+                </p-floatlabel>
+            </div>
+        </div>
+        <br>
+        <div class="flex justify-between" *ngIf="!isLoginPage">
+            <!-- Left Input -->
+            <div class="w-full">
+                <!-- <div> -->
+                <p-floatlabel variant="on">
+                    <p-password id="confirmPassword" formControlName="confirmPassword" [feedback]="false"
+                        autocomplete="off" fluid />
+                    <label for="confirmPassword">Confirm Password</label>
+                    <!-- <p-password formControlName="value" [invalid]="isInvalid('value')" [feedback]="false" autocomplete="off" fluid /> -->
+                </p-floatlabel>
+            </div>
+        </div>
+        <br>
+
+        <p-floatlabel variant="on" *ngIf="!isLoginPage">
+            <p-autocomplete formControlName="role" [dropdown]="true" [suggestions]="rolesArray"
+                (completeMethod)="search($event)" />
+            <label for="role">Role</label>
+        </p-floatlabel>
+        <br>
+        <!-- </div> -->
+        <div *ngIf="isLoginPage;then loginblock;else registerblock"></div>
+
+        <ng-template #loginblock>
+            <div class="mt-6">
+                <p-button class="w-full" label="Login" type="submit" severity="danger" />
+                <!-- <button class="w-full" pButton type="submit" label="login"></button> -->
+            </div>
+            <br>
+            <a (click)="goToRegister()">New User? Register Here</a>
+        </ng-template>
+
+        <ng-template #registerblock>
+            <div class="mt-6">
+                <button class="w-full" pButton type="submit" label="Register"></button>
+            </div>
+            <br>
+            <a (click)="goToLogin()">Already a User? Login Here</a>
+        </ng-template>
+
+        <!-- </div> -->
+    </form>
+</div>

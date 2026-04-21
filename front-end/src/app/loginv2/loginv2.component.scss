@@ -1,0 +1,43 @@
+
+.login-container {
+  // border: 1px solid red;
+  height: 100vh;
+  display: flex;
+  justify-content: center; /* centers horizontally */
+  align-items: center; 
+  background-color: white;
+}
+
+form {
+  /* Optional: control form width */
+  width: 500px;
+  // border: 1px solid blue;
+
+}
+
+.flex {
+  display: flex;
+}
+
+::ng-deep .p-inputtext {
+  width: 100%;
+  border-radius: 0%;
+  height: 3rem; /* Adjust height as needed */
+}
+
+// ::ng-deep .p-autocomplete {
+//   width: 100%;
+//   border-radius: 0%;
+//   height: 3rem; /* Adjust height as needed */
+// }
+
+// ::ng-deep .p-autocomplete-dropdown {
+//   border-radius: 0%;
+// }
+
+::ng-deep .p-button {
+  width: 100%;
+  border-radius: 0%;
+  height: 3rem; /* Adjust height as needed */
+  font-size: 1.2rem; /* Adjust font size as needed */
+}

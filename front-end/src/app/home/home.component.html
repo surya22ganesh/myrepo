@@ -1,0 +1,28 @@
+<div class="home-container">
+  <!-- Welcome Banner -->
+<div class="welcome-banner">
+  <div class="welcome-text">
+    <h2>Welcome back, {{ username }}</h2>
+    <p>Monitor and manage your change requests and deployments</p>
+  </div>
+  <div class="welcome-stats">
+    
+  </div>
+</div>
+
+  <!-- Blog Section -->
+  <div class="blog-section">
+    <h3>Latest Articles</h3>
+    <div class="blog-grid">
+      <div class="blog-card" *ngFor="let post of blogPosts">
+        <img [src]="post.image" alt="{{ post.title }}" class="blog-img" />
+        <div class="blog-content">
+          <h4>{{ post.title }}</h4>
+          <p class="blog-meta">By {{ post.author }} • {{ post.date }}</p>
+          <p class="blog-preview">{{ post.preview }}</p>
+          <button pButton label="Read More" class="p-button-sm"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

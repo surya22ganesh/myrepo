@@ -1,0 +1,64 @@
+.page-container {
+  max-width: 1800px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.06);
+}
+
+.release-title {
+  color: #4a90e2;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+}
+
+.custom-table ::ng-deep .p-datatable-thead > tr > th {
+  background-color: #004085 !important;
+  color: white;
+  text-align: center;
+  font-weight: 600;
+  padding: 6px 10px;
+}
+
+.custom-table ::ng-deep .p-datatable-tbody > tr > td {
+  background-color: #f0faff;
+  vertical-align: middle;
+  padding: 6px 10px;
+  text-align: center;
+  font-size: 13px;
+}
+
+.custom-table ::ng-deep .p-datatable-tbody > tr:nth-child(even) > td {
+  background-color: #eaf4fc;
+}
+
+.activity-textarea {
+  width: 100%;
+  border: none;
+  resize: none;
+  background-color: transparent;
+  font-size: 13px;
+  padding: 2px 4px;
+  height: 50px;
+}
+
+.status-select ::ng-deep .p-dropdown {
+  width: 100%;
+  font-size: 13px;
+  height: 30px;
+}
+
+@media (max-width: 1024px) {
+  .activity-textarea { height: 40px; }
+  .status-select ::ng-deep .p-dropdown { height: 28px; font-size: 12px; }
+}
+
+@media (max-width: 768px) {
+  .custom-table ::ng-deep .p-datatable-tbody > tr > td,
+  .custom-table ::ng-deep .p-datatable-thead > tr > th {
+    font-size: 12px;
+    padding: 4px 6px;
+  }
+}

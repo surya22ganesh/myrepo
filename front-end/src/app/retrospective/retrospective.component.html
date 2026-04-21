@@ -1,0 +1,100 @@
+<div class="retrospective-container p-4">
+    <div class="release-header d-flex align-items-center">
+        <h2 class="font-light">{{this.crqReleaseNumber}} - {{this.crqNumber}}
+        </h2>
+        <button pButton type="button" icon="pi pi-arrow-left" class="p-button-outlined p-button-secondary back-icon "
+            routerLink="/dashboard" label="Back">
+        </button>
+    </div>
+
+    <div class="mb-4 mt-2">
+        <form [formGroup]="retroForm">
+            <div class="card">
+                <p-table class="font-light" [value]="retro" [paginator]="true" [rows]="5"
+                    [tableStyle]="{ 'min-width': '55rem' }" [rowsPerPageOptions]="[5, 10, 20]">
+                    <ng-template #header>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Activity</th>
+                            <th>Teams Details</th>
+                            <th>Status</th>
+                            <th>RAG</th>
+                            <th>Comments</th>
+                            <th>RCA</th>
+                            <th>Preventive Action</th>
+                            <th>Additional Comments</th>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template #body let-task let-rowIndex="rowIndex">
+                        <tr>
+                            <td>{{ rowIndex + 1 }}</td>
+
+                            <!-- Activity (readonly) -->
+                            <td>{{ task.activity }}</td>
+
+                            <!-- Teams Details (readonly) -->
+                            <td>{{ task.teamDetails }}</td>
+
+                            <!-- Status (readonly) -->
+                            <td>
+                                <!-- <input type="text" [(ngModel)]="task.status" [class]="getStatusClass(task)"
+                                placeholder="" readonly /> -->
+                                <!-- <span [ngClass]="getStatusClass(task)" class="p-2 rounded text-white">
+                                    {{ task.status }}</span> -->
+                                {{ task.status }}
+                            </td>
+                            <td>
+                                <p style="border-radius: 100%" ; [ngClass]="{
+                                                'bg-red-500': task.rag === 'RED',
+                                                'bg-yellow-500': task.rag === 'AMBER'
+                                                }">.
+                                    <!-- {{ task.rag }} -->
+                                </p>
+
+                                <!-- Comments (readonly) -->
+                            </td>
+                            <td>
+                                {{ task.comments }}
+                            </td>
+
+                            <!-- RCA (editable) -->
+                            <td>
+                                <textarea pInputTextarea [(ngModel)]="task.rca" [ngModelOptions]="{ standalone: true }"
+                                    rows="2">
+</textarea>
+                            </td>
+
+                            <!-- Preventive Action (editable) -->
+                            <td>
+                                <textarea pInputTextarea [(ngModel)]="task.preventiveAction"
+                                    [ngModelOptions]="{ standalone: true }" rows="2">
+</textarea>
+                            </td>
+
+                            <!-- Additional Comments (editable) -->
+                            <td>
+                                <textarea pInputTextarea [(ngModel)]="task.additionalComments"
+                                    [ngModelOptions]="{ standalone: true }" rows="2">
+</textarea>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+
+            </div>
+        </form>
+    </div>
+    <p-toast />
+</div>
+<!-- Buttons -->
+<div class="button-row flex justify-content-center gap-3">
+    <!-- <div class="button-row mt-4 text-center"> -->
+    <!--  <button pButton type="button" label="Back" class="p-button-outlined p-button-success" routerLink="/dashboard"></button>-->
+    <button pButton type="button" label="Save" class="p-button-success mr-3" (click)="onSubmit()"
+        [disabled]="!isSaveEnabled()"></button>
+    <!-- Export Excel Button -->
+    <button pButton type="button" label="Export Excel" icon="pi pi-file-excel" class="p-button-primary mr-3"
+        (click)="exportToExcel()">
+    </button>
+</div>

@@ -1,0 +1,183 @@
+<p-toast></p-toast>
+<div class="container">
+  <h2 class="title">My TaskList</h2>
+
+  <!-- <div class="table-responsive"> -->
+
+    <p-table [value]="tasks" [paginator]="true" [rows]="5" [totalRecords]="tasks ? tasks.length : 0"
+      [rowsPerPageOptions]="[5,10,20]" [paginatorDropdownAppendTo]="'body'" class="custom-table">
+
+      <!-- Header -->
+      <ng-template pTemplate="header">
+        <tr>
+          <th>S.No</th>
+          <th>CRQ-Number</th>
+          <th>Activity</th>
+          <th>Planned Start Date/Time</th>
+          <th>Duration</th>
+          <th>Planned End Date/Time</th>
+          <th>Team Details</th>
+          <th>Action</th>
+          <th>Status</th>
+        </tr>
+      </ng-template>
+
+      <!-- Body -->
+      <ng-template pTemplate="body" let-task let-i="rowIndex">
+        <tr>
+          <td>{{ i + 1 }}</td>
+          <td>{{ task.variables?.crqRef || '-' }}</td>
+          <td>{{ task.variables?.activity || '-' }}</td>
+          <td>{{ task.variables?.plannedStartDateTime || '-' }}</td>
+          <td>{{ task.variables?.duration || '-' }}</td>
+          <td>{{ task.variables?.plannedEndDateTime || '-' }}</td>
+          <td>{{ task.variables?.teamDetails || '-' }}</td>
+          <td>
+            <button class="open-btn" (click)="openPopup(task)">Open Task</button>
+          </td>
+          <td>
+            {{ task.variables?.status || 'Assigned' }}
+          </td>
+        </tr>
+      </ng-template>
+
+      <!-- Empty Message -->
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="9" class="text-center no-data">
+            No ticket found
+          </td>
+        </tr>
+      </ng-template>
+
+    </p-table>
+
+  </div>
+<!-- </div> -->
+
+<!-- Popup Modal -->
+<div class="popup-overlay" *ngIf="popupOpen">
+  <div class="popup-content">
+    <!-- Close Icon -->
+    <span class="popup-close" (click)="closePopup()">×</span>
+    <!-- <h3 class="form-title">Task: {{ selectedTask?.name }}</h3> -->
+
+    <form #deploymentForm="ngForm" (ngSubmit)="completeTask(deploymentForm)">
+      <!-- ✅ Status Dropdown -->
+      <!-- <div class="col-6">
+        <label class="question-label">Status:</label>
+        <p-autoComplete placeholder="Select Status" class="m1" [(ngModel)]="status" [dropdown]="true"
+          [suggestions]="filteredStatuses" (completeMethod)="filterStatuses($event)"
+          (ngModelChange)="onStatusSelect($event)" field="label" name="status">
+        </p-autoComplete>
+      </div>
+
+      <br /><br />
+
+
+      <label class="question-label">Comments:</label>
+      <textarea [(ngModel)]="comments" name="comments" class="form-control activity-textarea" rows="3"
+        placeholder="Enter your comments...">
+      </textarea>
+
+      <br />
+
+
+      <div class="button-row">
+        <button type="button" class="assign-btn" (click)="sendStatusAndComments()">Send</button>
+      </div>
+
+      <hr /> -->
+
+      <div class="status-container">
+        <h2>Update Task Status</h2>
+
+
+        <div class="col-6">
+          <label class="question-label">Status <span class="required-asterisk2">*</span><br></label>
+          <p-autoComplete placeholder="Select Status" class="m1" [(ngModel)]="selectedStatus" [dropdown]="true"
+            [suggestions]="filteredStatuses" (completeMethod)="filterStatuses($event)"
+            (ngModelChange)="onStatusChange()" field="label" name="status" required #statusModel="ngModel">
+          </p-autoComplete>
+        </div>
+        <div class="error-msg" *ngIf="(statusModel.touched || deploymentForm.submitted) && statusModel.invalid">
+          Status is required.
+        </div>
+
+
+
+        <!-- <select id="status" [(ngModel)]="selectedStatus">
+    <option value="">-- Select Status --</option>
+    <option *ngFor="let status of statusOptions" [value]="status">{{ status }}</option>
+  </select> -->
+        <div class="comments-container">
+          <label for="comments" class="comments-label">Comments
+            <span class="required-asterisk" *ngIf="isCommentRequired()" aria-hidden="true">
+              *
+            </span>
+          </label>
+          <textarea id="comments" name="comments" [(ngModel)]="comments" placeholder="Enter comments..."
+            [required]="isCommentRequired()" #commentsModel="ngModel">
+         ></textarea>
+        </div>
+
+
+        <div class="error-msg"
+          *ngIf="isCommentRequired() && (commentsModel.touched || deploymentForm.submitted) && commentsModel.invalid">
+          Comments is required for Failed status.
+        </div>
+
+        <br>
+        <!-- <button type="button" class="assign-btn" (click)="save(parsedTask)" [disabled]="isLoading">
+          Save
+        </button> -->
+
+        <div *ngIf="responses.length > 0" class="response-list">
+          <h3>Saved Responses</h3>
+          <ul>
+            <li *ngFor="let res of responses">
+              <b>Status:</b> {{ res.status }} |
+              <b>Comments:</b> {{ res.comments }} |
+              <b>RAG:</b> <span [style.color]="res.rag">{{ res.rag }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <label class="question-label execute-label">Execute deployment?<span class="required-asterisk1">*</span></label>
+
+      <div class="radio-group">
+        <label class="radio-option">
+          <input type="radio" name="executeDeployment" [(ngModel)]="executeDeployment" value="yes" required
+            #executeModel="ngModel" />
+          <!-- [disabled]="isYesDisabled()" -->
+          <!-- <input type="radio" name="executeDeployment" [(ngModel)]="executeDeployment" value="yes" required /> -->
+          <span>Yes</span>
+        </label>
+        <label class="radio-option">
+          <!-- <input type="radio" name="executeDeployment" [(ngModel)]="executeDeployment" value="no" required /> -->
+          <input type="radio" name="executeDeployment" [(ngModel)]="executeDeployment" value="no" required />
+          <!-- [disabled]="isNoDisabled()"  -->
+          <span>No</span>
+        </label>
+      </div>
+      <div class="error-msg" *ngIf="(executeModel.touched || deploymentForm.submitted) && executeModel.invalid">
+        Please select Yes or No.
+      </div>
+      <!-- Validation message -->
+      <!-- <div *ngIf="showValidationMessage" class="error-msg"><form #form="ngForm" (ngSubmit)="completeTask(form)">
+        Please select any one option.
+      </div> -->
+
+      <div class="button-row">
+        <!-- <button type="button" class="start-btn" (click)="startTask()">Start</button> -->
+        <div class="button-row">
+
+          <button type="submit" class="complete-btn"
+            [disabled]="isLoading || isCommentsInvalid() || !getStatusValue() || !executeDeployment">Complete</button>
+          <button type="button" class="cancel-btn" (click)="closePopup()">Cancel</button>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,95 @@
+
+
+::ng-deep.p-autocomplete.m1 {
+    /* border: 1px solid blue; */
+    width: 96%;
+    height: 88%;
+    font-size: 14px;
+}
+
+::ng-deep .p-fileupload {
+    margin-left: 1em;
+}
+
+::ng-deep .p-fileupload-content {
+    padding: 0 !important;
+}
+
+::ng-deep .p-fileupload-header {
+    height: 55px !important;
+}
+
+::ng-deep.p-datatable-thead>tr>th {
+    background-color: #f7f9fb !important;
+    /* color: black !important; */
+    font-weight: light !important;
+}
+
+::ng-deep.p-button-success {
+    /* color: orange !important; */
+    background-color: #10b981 !important;
+    margin-right: 1em !important;
+    margin-bottom: 1em !important;
+}
+
+::ng-deep.p-datatable-thead>tr>th {
+    background-color: #e9ecef !important;
+    /* background-color: #f7f9fb !important; */
+    /* color: black !important; */
+    font-weight: light !important;
+}
+
+.create-crq-form {
+    position: relative;
+}
+
+.right-upload {
+    position: absolute;
+    right: 2rem;
+    top: 0.5rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.rota-cancel-btn {
+    background-color: #f8f9fa !important;
+    border: 1px solid #ced4da !important;
+    color: #495057 !important;
+    height: 40px;
+    padding: 7px 18px;
+}
+
+/* Remove green hover completely */
+.rota-cancel-btn:hover {
+    background-color: #f8f9fa !important;
+    border: 1px solid #ced4da !important;
+    color: #495057 !important;
+    box-shadow: none !important;
+}
+
+/* Remove focus glow */
+.rota-cancel-btn:focus {
+    box-shadow: none !important;
+}
+
+
+
+
+/* ::ng-deep.p-button-outlined.p-button-danger{
+    width: 20em;
+    font-size: larger;
+} */
+
+/* ::ng-deep .p-inputtext:hover {
+  border-color: #FF6B6B !important;
+} */
+
+.upload-actions .p-button {
+    display: flex;
+    align-items: center;
+}
+.upload-actions .p-button-outlined {
+    margin-top: -15px;
+    padding: 7px 18px;
+    border-color: #9ca3af; 
+}

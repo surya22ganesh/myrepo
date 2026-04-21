@@ -1,0 +1,265 @@
+<div class="main-wrapper">
+
+    <div class="page-header">
+        <span class="heading-text">Create New CRQ</span>
+    </div>
+    <div class="crq-container">
+
+
+        <div class="crq-row">
+            <label class="label">CRQ Ref <span class="required">*</span></label>
+            <input pInputText [(ngModel)]="crqForm.crqRef" name="crqRef" #crqRef="ngModel" required maxlength="50"
+                pattern="^(CRQ|eCRQ)[a-zA-Z0-9]*$" class="value-input" placeholder="Enter CRQ Ref" />
+
+            <small class="error" *ngIf="crqRef.invalid && crqRef.touched">
+
+                <span *ngIf="crqRef.errors?.['pattern']">
+                    Must start with CRQ or eCRQ and Only alphanumeric characters allowed
+                </span>
+
+                <span *ngIf="crqRef.errors?.['required']">
+                    CRQ Ref is mandatory
+                </span>
+
+
+            </small>
+
+        </div>
+
+        <div class="crq-row">
+            <label class="label">Summary <span class="required">*</span></label>
+            <input pInputText [(ngModel)]="crqForm.summary" #summary="ngModel" required maxlength="50"
+                pattern="^[a-zA-Z0-9 ]+$" class="value-input" placeholder="Enter Summary" />
+            <small class="error" *ngIf="summary.invalid && summary.touched">
+                <span *ngIf="summary.errors?.['required']">
+                    Summary is mandatory
+                </span>
+                <span *ngIf="summary.errors?.['maxlength']">
+                    Maximum 50 characters allowed
+                </span>
+                <span *ngIf="summary.errors?.['pattern']">
+                    Only alphanumeric characters allowed
+                </span>
+            </small>
+        </div>
+
+        <div class="crq-row">
+            <label class="label">Affected Services <span class="required">*</span></label>
+            <input pInputText [(ngModel)]="crqForm.affectedServices" #affectedServices="ngModel" required maxlength="50"
+                pattern="^[a-zA-Z0-9 ]+$" class="value-input" placeholder="Enter Affected Services" />
+            <small class="error" *ngIf="affectedServices.invalid && affectedServices.touched">
+                <span *ngIf="affectedServices.errors?.['required']">
+                    Affected Services is mandatory
+                </span>
+                <span *ngIf="affectedServices.errors?.['maxlength']">
+                    Maximum 50 characters allowed
+                </span>
+                <span *ngIf="affectedServices.errors?.['pattern']">
+                    Only alphanumeric characters allowed
+                </span>
+            </small>
+        </div>
+
+        <div class="crq-row">
+            <label class="label">Author/Contact <span class="required">*</span></label>
+            <input pInputText [(ngModel)]="crqForm.author_contact" #author_contact="ngModel" required maxlength="50"
+                pattern="^[a-zA-Z0-9 ]+$" class="value-input" placeholder="Enter Author/Contact" />
+            <small class="error" *ngIf="author_contact.invalid && author_contact.touched">
+                <span *ngIf="author_contact.errors?.['required']">
+                    Author/Contact is mandatory
+                </span>
+                <span *ngIf="author_contact.errors?.['maxlength']">
+                    Maximum 50 characters allowed
+                </span>
+                <span *ngIf="author_contact.errors?.['pattern']">
+                    Only alphanumeric characters allowed
+                </span>
+            </small>
+        </div>
+
+        <div class="crq-row">
+            <label class="label">Last Update</label>
+            <input pInputText [value]="crqForm.lastUpdatedDateTime | date:'dd-MM-yyyy HH:mm'" class="value-input"
+                disabled />
+        </div>
+
+    </div>
+
+    <!-- Dynamic Table -->
+    <div class="table-wrapper">
+        <table class="crq-table">
+            <thead>
+                <tr>
+                    <th>Sr.</th>
+                    <th>Customer Impact<span class="required">*</span></th>
+                    <th>Service/Server Outage<span class="required">*</span></th>
+                    <th>Activity<span class="required">*</span></th>
+                    <th>Impacted Service<span class="required">*</span></th>
+                    <th>Start Date/Time<span class="required">*</span></th>
+                    <th>Duration<span class="required">*</span></th>
+                    <th>End Date/Time<span class="required">*</span></th>
+                    <th>Team Details<span class="required">*</span></th>
+                    <th>POC Names <span class="required">*</span></th>
+                    <th>POC Email Details <span class="required">*</span></th>
+                    <th>Support Team Contact Details <span class="required">*</span></th>
+                    <th>Additional Notes</th>
+                    <th class="action-header">
+                        <button pButton icon="pi pi-plus" class="p-button-success" (click)="addRow()"></button>
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let row of crqRows; let i = index">
+
+                    <td>{{ i + 1 }}</td>
+
+                    <td>
+                        <select [(ngModel)]="row.customerImpact" name="customerImpact{{i}}" required #ciRef="ngModel"
+                            class="value-input">
+                            <option value="">Select</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                        <small class="error" *ngIf="ciRef.invalid && ciRef.touched">
+                            Required
+                        </small>
+                    </td>
+
+                    <td>
+                        <select [(ngModel)]="row.serviceOutage" name="serviceOutage{{i}}" required #soRef="ngModel"
+                            class="value-input">
+                            <option value="">Select</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                        <small class="error" *ngIf="soRef.invalid && soRef.touched">
+                            Required
+                        </small>
+                    </td>
+
+                    <td>
+                        <textarea pInputTextarea [(ngModel)]="row.activity" maxlength="4000" autoResize="true" rows="3"
+                            class="value-textarea"></textarea>
+                    </td>
+
+                    <td>
+                        <textarea pInputTextarea [(ngModel)]="row.impactedService" maxlength="1000" autoResize="true"
+                            rows="2" class="value-textarea">></textarea>
+                    </td>
+
+                    <td>
+                        <p-datepicker [(ngModel)]="row.startDateTime" [showTime]="true" hourFormat="24"
+                            dateFormat="dd/mm/yy" placeholder="DD/MM/YYYY HH:MM" inputStyleClass="value-input"
+                            [minDate]="minDate" [showIcon]="true" appendTo="body" [showButtonBar]="true"
+                            (onSelect)="onStartDateChange(row)" (ngModelChange)="onDateOrDurationChange(row)"
+                            (onClearClick)="onDateOrDurationChange(row)" [readonlyInput]="true">
+                        </p-datepicker>
+                        <small class="error" *ngIf="row.startDateTime && !isFutureDate(row.startDateTime)">
+                            Must be a future date
+                        </small>
+                    </td>
+
+                    <td>
+
+                        <p-datepicker [(ngModel)]="row.duration" [timeOnly]="true" hourFormat="24" [showTime]="true"
+                            [showSeconds]="true" appendTo="body"
+                            inputStyleClass="value-input" placeholder="HH:MM:SS" [showButtonBar]="true"
+                            [readonlyInput]="true" (onFocus)="onDurationFocus(row)" (onBlur)="onDurationBlur(row)"
+                            (onSelect)="durationTempSet.delete(row); onDateOrDurationChange(row)"
+                            (onClearClick)="onDateOrDurationChange(row)" (ngModelChange)="onDateOrDurationChange(row)">
+                        </p-datepicker>
+                        <!-- working for HH:mm:ss but below timepicker shows current system time-->
+                        <!-- <p-datepicker [(ngModel)]="row.duration" [timeOnly]="true" hourFormat="24" [showTime]="true"
+                            [showSeconds]="true" [stepSecond]="1" [stepMinute]="1" appendTo="body"
+                            inputStyleClass="value-input" placeholder="HH:MM:SS" [showButtonBar]="true"
+                            [readonlyInput]="true" (onSelect)="onDateOrDurationChange(row)"
+                            (onClearClick)="onDateOrDurationChange(row)" (ngModelChange)="onDateOrDurationChange(row)">
+                        </p-datepicker> -->
+                        <small class="error" *ngIf="!row.duration && !isValidDuration(row.duration)">
+                            Duration is required (HH:mm:ss)
+                        </small>
+                    </td>
+
+                    <td>
+                        <p-datepicker [(ngModel)]=" row.endDateTime" [showTime]="true" hourFormat="24"
+                            dateFormat="dd/mm/yy" placeholder="DD/MM/YYYY HH:MM" inputStyleClass="value-input"
+                            [minDate]="minDate" [showIcon]="true" appendTo="body" [showButtonBar]="true"
+                            (onSelect)="onEndDateChange(row)" [readonlyInput]="true">
+                        </p-datepicker>
+                    </td>
+
+                    <td>
+                        <select [(ngModel)]="row.teamDetails" class="value-input">
+                            <option value="">Select</option>
+                            <option *ngFor="let team of teamDetailsList" [value]="team">{{ team }}</option>
+                        </select>
+                    </td>
+
+                    <td>
+                        <input pInputText [(ngModel)]="row.pocNames" name="pocNames{{i}}" class="value-input" required maxlength="1000"
+                            pattern="^[a-zA-Z0-9 ,]+$" #pocNamesRef="ngModel" />
+
+                        <small class="error" *ngIf="pocNamesRef.invalid && pocNamesRef.touched">
+                            Mandatory and should be comma-separated alphanumeric values
+                        </small>
+                    </td>
+
+                    <td>
+                        <input pInputText [(ngModel)]="row.pocEmailDetails" name="pocEmail{{i}}" class="value-input" required
+                            maxlength="2000"
+                            pattern="^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})(,\s*[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})*$"
+                            #pocEmailRef="ngModel" />
+
+                        <small class="error" *ngIf="pocEmailRef.invalid && pocEmailRef.touched">
+                            Enter valid comma-separated email IDs
+                        </small>
+                    </td>
+
+                    <td>
+                        <input pInputText [(ngModel)]="row.supportContactDetails" class="value-input" name="supportContact{{i}}" required
+                            maxlength="50" pattern="^[+0-9 ]+$" #supportContactRef="ngModel" />
+
+                        <small class="error" *ngIf="supportContactRef.invalid && supportContactRef.touched">
+                            Contact details are mandatory and should contain only +, numbers, and spaces
+                        </small>
+                    </td>
+
+                    <td>
+                        <textarea pInputTextarea [(ngModel)]="row.additionalNotes" maxlength="4000"></textarea>
+                    </td>
+
+                    <td class="action-buttons">
+                        <!-- Move Up -->
+                        <button pButton icon="pi pi-arrow-up" class="p-button-blue" (click)="moveRowUp(i)"
+                            [disabled]="i === 0">
+                        </button>
+
+                        <!-- Move Down -->
+                        <button pButton icon="pi pi-arrow-down" class="p-button-blue" (click)="moveRowDown(i)"
+                            [disabled]="i === crqRows.length - 1">
+                        </button>
+                        <!-- Add Row -->
+                        <!-- <button pButton icon="pi pi-plus" class="p-button-success" (click)="addRow()">
+                        </button> -->
+
+                        <!-- Delete Row -->
+                        <button pButton icon="pi pi-times" class="p-button-danger" (click)="removeRow(i)"
+                            *ngIf="crqRows.length > 1">
+                        </button>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="button-container">
+    <button pButton label="Save as Draft" (click)="saveCrqForm()"></button>
+
+    <button pButton label="Start CRQ" [disabled]="!crqSaved">
+    </button>
+    <button pButton label="Export to Excel" icon="pi pi-download" class="p-button-success" (click)="exportToExcel()"
+        *ngIf="isDeploymentManager && (status === 'DRAFT' || status === 'ACTIVE')">
+    </button>
+</div>

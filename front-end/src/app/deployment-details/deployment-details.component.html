@@ -1,0 +1,54 @@
+<br><br>
+
+<div class="page-container p-4">
+  <h2 class="release-title">25.6A Release - CRQ2121212</h2>
+
+  <p-table
+    [value]="employees"
+    [paginator]="true"
+    [rows]="10"
+    [responsiveLayout]="'scroll'"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} employees"
+    [rowsPerPageOptions]="[5,10,20]"
+    [styleClass]="'custom-table'">
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width:50px;">S.No</th>
+        <th>Activity</th>
+        <th>Impacted Service</th>
+        <th>Start Date/Time</th>
+        <th>End Date/Time</th>
+        <th>Team Details</th>
+        <th>Status</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-employee let-i="rowIndex">
+      <tr>
+        <td>{{ i + 1 }}</td>
+        <td>
+          <textarea class="activity-textarea" rows="2" readonly>{{ employee.activity }}</textarea>
+        </td>
+        <td>{{ employee.impactedService }}</td>
+        <td>{{ employee.startDate | date:'short' }}</td>
+        <td>{{ employee.endDate | date:'short' }}</td>
+        <td>{{ employee.department }}</td>
+        <td>
+          <p-select
+            [options]="statuslist"
+            [(ngModel)]="employee.status"
+            (onChange)="updateStatus(employee)"
+            [filter]="false"
+            [showClear]="true"
+            [disabled]="employee.department !== role"
+            placeholder="Select"
+            class="status-select">
+          </p-select>
+        </td>
+      </tr>
+    </ng-template>
+
+  </p-table>
+</div>

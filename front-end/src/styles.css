@@ -1,0 +1,38 @@
+
+@import "bootstrap/dist/css/bootstrap.min.css";
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(240, 238, 238);
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.footer {
+  margin-top: auto;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: black;
+  text-align: center;
+  color: white;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  font-size: 1rem;
+}
+
+html, body {
+  height: 100%;
+}
+
+/* Make all buttons and links show hand cursor */
+button, a {
+  cursor: pointer;
+}
+
+/* For spans/divs acting like buttons (example ⚙️ icon) */
+.pointer {
+  cursor: pointer;
+}

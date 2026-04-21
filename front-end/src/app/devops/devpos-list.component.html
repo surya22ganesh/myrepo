@@ -1,0 +1,71 @@
+<br><br>
+
+<div class=" page-container">
+  <h2 class="release-title">25.6A Release - CRQ2121212</h2>
+
+  <div class="table-responsive">
+    <table class="table custom-bg-table table-striped table-bordered custom-table">
+      <thead class="table-dark text-center">
+        <tr>
+          <th style="min-width: 60px;">S.No</th>
+    <th style="min-width: 200px;">Activity</th>
+    <th style="min-width: 180px;">Impacted Service</th>
+    <th style="min-width: 160px;">Start Date/Time</th>
+    <th style="min-width: 160px;">End Date/Time</th>
+    <th style="min-width: 140px;">Team Details</th>
+    <th style="min-width: 200px;">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let devops of devops; let i = index" class="align-middle text-center">
+             <td>{{ i + 1 }}</td>
+          <td>
+      <textarea class="form-control activity-textarea" rows="3" readonly>{{ devops.activity }}</textarea>
+    </td>
+    <td>{{ devops.impactedService }}</td>
+    <td>{{ devops.startDate | date:'short' }}</td>
+    <td>{{ devops.endDate | date:'short' }}</td>
+    <td>{{ devops.department }}</td>
+  <!-- <td>
+  <div
+    class="form-select status-display"
+    [ngClass]="getStatusClass(devops.department === 'Siebel' ? 'Completed' : (devops.status || 'In Progress'))"
+  >
+    {{ devops.department === 'Siebel' ? 'Completed' : (devops.status || 'In Progress') }}
+  </div>
+</td> -->
+<td>
+  <div
+    class="form-select status-display"
+    [ngClass]="getStatusClass(devops.status)"
+  >
+    {{ devops.status }}
+  </div>
+</td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="selectedCrq" class="pipeline-container mt-4">
+  <h5 class="text-center">Deployment Progress for {{ selectedCrq }}</h5>
+
+  <div class="pipeline-stages">
+    <div *ngFor="let stage of stages; let i = index" class="stage text-center">
+
+      <div [ngClass]="{
+            'active-stage': i === currentStage,
+            'completed-stage': i < currentStage
+          }">
+        {{ stage }}
+      </div>
+
+      <!-- Animation or icon -->
+      <div *ngIf="i === currentStage" class="loader"></div>
+      <div *ngIf="i < currentStage" class="completed-icon">✔️</div>
+
+    </div>
+  </div>
+</div>
+
+
+  </div>
+</div>

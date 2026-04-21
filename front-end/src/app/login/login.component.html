@@ -1,0 +1,64 @@
+<div class="login-container">
+  <p-toast />
+  <p-card class="login-card shadow-4">
+    <!-- Vodafone Logo -->
+    <div class="text-center mb-4">
+      <img src="assets/Vodafone3.png" alt="Vodafone Logo" width="120" />
+    </div>
+
+    <h4 class="text-center mb-4 text-danger">ReleaseX</h4>
+
+    <form (ngSubmit)="onLogin()" #loginForm="ngForm" class="p-fluid">
+      <!-- Username -->
+      <div class="field mb-4">
+        <div class="w-full">
+          <p-floatlabel variant="on">
+            <label for="username" class="form-label">User Name</label>
+            <input pInputText id="username" type="text" name="username" [(ngModel)]="username"
+              placeholder="Enter your username" #usernameCtrl="ngModel"
+              [ngClass]="{ 'ng-invalid ng-dirty': usernameCtrl.invalid && usernameCtrl.touched }" />
+            <!-- <input pInputText id="username" type="text" name="username" [(ngModel)]="username"
+              placeholder="Enter your username" required #usernameCtrl="ngModel"
+              [ngClass]="{ 'ng-invalid ng-dirty': usernameCtrl.invalid && usernameCtrl.touched }" /> -->
+            <small class="text-danger" *ngIf="usernameCtrl.invalid && usernameCtrl.touched">
+              Username is required
+            </small>
+          </p-floatlabel>
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="field mb-4">
+        <div class="w-full">
+          <p-floatlabel variant="on">
+            <p-password id="password" name="password" [(ngModel)]="password" placeholder="Enter your password"
+              [feedback]="false" toggleMask="true" #passwordCtrl="ngModel"
+              [ngClass]="{ 'ng-invalid ng-dirty': passwordCtrl.invalid && passwordCtrl.touched }" fluid />
+            <!-- <p-password id="password" name="password" [(ngModel)]="password" placeholder="Enter your password"
+              [feedback]="false" toggleMask="true" required #passwordCtrl="ngModel"
+              [ngClass]="{ 'ng-invalid ng-dirty': passwordCtrl.invalid && passwordCtrl.touched }" fluid /> -->
+            <label for="password" class="form-label">Password</label>
+            <small class="text-danger" *ngIf="passwordCtrl.invalid && passwordCtrl.touched">
+              Password is required
+            </small>
+          </p-floatlabel>
+        </div>
+      </div>
+
+      <!-- Login Button -->
+<!--      <button pButton type="submit" label="Login" class="p-button-danger w-100" [disabled]="loginForm.invalid"></button>-->
+      <button
+        pButton
+        type="submit"
+        label="Login"
+        class="p-button-danger w-100">
+      </button>
+      <!-- Error Message -->
+      <div *ngIf="error" class="text-danger text-center mt-3">{{ error }}</div>
+    </form>
+
+    <div class="login-footer mt-4 text-center">
+      © {{ currentYear }} Powered by <b>VodafoneThree</b>
+    </div>
+  </p-card>
+</div>
