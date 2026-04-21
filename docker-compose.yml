@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  front-end:
+    build: ./phase2-front-end
+    container_name: front-end
+    ports:
+      - "4200:80"
+    networks:
+      - microservices-net
+
+  service-registry:
+    build: ./service-registry
+    container_name: service-registry
+    ports:
+      - "8761:8761"
+    networks:
+      - microservices-net
+
+  user-profile:
+    build: ./user-profile
+    container_name: user-profile
+    ports:
+      - "9092:9092"
+    depends_on:
+      - service-registry
+    networks:
+      - microservices-net
+
+networks:
+  microservices-net:
+    driver: bridge
